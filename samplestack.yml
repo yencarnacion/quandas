@@ -1,0 +1,16 @@
+- hosts: samplestack
+  pre_tasks:
+    - name: install apt packages
+      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      sudo: True
+      with_items:
+        - unzip
+        - tar
+  roles:
+     - { role: ansiblebit.oracle-java,
+         oracle_java_set_as_default: yes,
+         sudo: yes }
+     - { role: samplestack,
+         sudo: yes }
+
+
